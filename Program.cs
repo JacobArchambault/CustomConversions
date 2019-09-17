@@ -23,6 +23,14 @@ namespace CustomConversions
             Rectangle rect = new Rectangle(10, 5);
             DrawSquare((Square)rect);
 
+            // Converting an int to a Square.
+            Square sq2 = (Square)90;
+            Console.WriteLine("sq2 = {0}", sq2);
+
+            // Converting a Square to an int.
+            int side = (int)sq2;
+            Console.WriteLine("Side length of sq2 = {0}", side);
+
             Console.ReadLine();
 
 
@@ -90,6 +98,13 @@ namespace CustomConversions
             return s;
         }
 
+        public static explicit operator Square(int sideLength)
+        {
+            Square newSq = new Square { Length = sideLength };
+            return newSq;
+        }
+
+        public static explicit operator int (Square s) => s.Length;
     }
 
 }
