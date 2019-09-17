@@ -31,6 +31,18 @@ namespace CustomConversions
             int side = (int)sq2;
             Console.WriteLine("Side length of sq2 = {0}", side);
 
+            Square s3 = new Square { Length = 7 };
+
+            // Make an implicit cast.
+            Rectangle rect2 = s3;
+            Console.WriteLine("rect2 = {0}", rect2);
+
+            // Explicit cast syntax still OK.
+            Square s4 = new Square { Length = 3 };
+            Rectangle rect3 = (Rectangle)s4;
+
+            Console.WriteLine("rect3 = {0}", rect3);
+
             Console.ReadLine();
 
 
@@ -67,6 +79,16 @@ namespace CustomConversions
         }
 
         public override string ToString() => $"[Width = {Width}; Height = {Height}]";
+
+        public static implicit operator Rectangle(Square s)
+        {
+            Rectangle r = new Rectangle
+            {
+                Height = s.Length,
+                Width = s.Length * 2 // Assume the length of the new Rectangle with (Length * 2).
+            };
+            return r;
+        }
     }
 
     public struct Square
